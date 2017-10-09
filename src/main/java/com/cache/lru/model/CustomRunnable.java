@@ -7,11 +7,11 @@ import com.cache.lru.core.util.ByteUtil;
 
 public class CustomRunnable<T> implements Runnable {
 
-	private DoubleLinkedListNode<T> node;
+	private DoublyNode<T> node;
 
 	private FileService fileService;
 
-	public CustomRunnable(DoubleLinkedListNode<T> node, FileService fileService) {
+	public CustomRunnable(DoublyNode<T> node, FileService fileService) {
 		this.node = node;
 		this.fileService = fileService;
 	}

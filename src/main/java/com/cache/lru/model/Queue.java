@@ -2,8 +2,8 @@ package com.cache.lru.model;
 
 public class Queue {
 
-	private DoubleLinkedListNode head = null;
-	private DoubleLinkedListNode end = null;
+	private DoublyNode head = null;
+	private DoublyNode end = null;
 
 	private int size;
 
@@ -11,7 +11,7 @@ public class Queue {
 		this.size = size;
 	}
 
-	public synchronized void  setHead(DoubleLinkedListNode node) {
+	public synchronized void  setHead(DoublyNode node) {
 		node.setNext(head);
 		node.setPre(null);
 
@@ -25,7 +25,7 @@ public class Queue {
 			end = head;
 	}
 
-	private synchronized void remove(DoubleLinkedListNode node) {
+	private synchronized void remove(DoublyNode node) {
 		if (node.getPre() != null) {
 			node.getPre().setNext(node.getNext());
 		} else {
@@ -39,7 +39,7 @@ public class Queue {
 		}
 	}
 
-	public synchronized void moveTofront(DoubleLinkedListNode node) {
+	public synchronized void moveTofront(DoublyNode node) {
 		remove(node);
 		setHead(node);
 	}

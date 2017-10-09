@@ -5,12 +5,12 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.cache.lru.model.CacheDiskBackUpStrategy;
-import com.cache.lru.model.DoubleLinkedListNode;
+import com.cache.lru.model.DoublyNode;
 import com.cache.lru.model.Queue;
 
 public class LRUCache {
 	private int size;
-	private Map<Integer, DoubleLinkedListNode> map = new ConcurrentHashMap<Integer, DoubleLinkedListNode>();
+	private Map<Integer, DoublyNode> map = new ConcurrentHashMap<Integer, DoublyNode>();
 	private Queue queue;
 	private LRUBackUpService lruBackUpService;
 	private CacheDiskBackUpStrategy cacheStrategy;
@@ -24,7 +24,7 @@ public class LRUCache {
 
 	public <T> T get(int key) {
 		if (map.containsKey(key)) {
-			DoubleLinkedListNode n = map.get(key);
+			DoublyNode n = map.get(key);
 			queue.moveTofront(n);
 			return (T) n.getValue();
 		}
@@ -34,11 +34,11 @@ public class LRUCache {
 
 	public <T> void put(int key, T value) throws IOException {
 		if (map.containsKey(key)) {
-			DoubleLinkedListNode old = map.get(key);
+			DoublyNode old = map.get(key);
 			old.setValue(value);
 			queue.moveTofront(old);
 		} else {
-			DoubleLinkedListNode created = new DoubleLinkedListNode(key, value);
+			DoublyNode created = new DoublyNode(key, value);
 			if (map.size() >= size) {
 				map.remove(queue.getLastNodeKey());
 				queue.removeLast();
