@@ -6,11 +6,11 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
-import com.cache.lru.model.Node;
+import com.cache.lru.model.DoubleLinkedListNode;
 
 public class ByteUtil {
 	
-	public static byte[] objToByte(Node node) throws IOException {
+	public static byte[] objToByte(DoubleLinkedListNode node) throws IOException {
 	    ByteArrayOutputStream byteStream = new ByteArrayOutputStream();
 	    ObjectOutputStream objStream = new ObjectOutputStream(byteStream);
 	    objStream.writeObject(node);

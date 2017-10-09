@@ -2,18 +2,19 @@ package com.cache.lru.model;
 
 import java.io.Serializable;
 
-public class Node<T> implements Serializable {
 
-	int key;
-	T value;
-	Node pre;
-	Node next;
+public class DoubleLinkedListNode<T> implements Serializable {
+
+	private int key;
+	private T value;
+	private transient DoubleLinkedListNode pre;
+	private transient DoubleLinkedListNode next;
 	
-	public Node(T value) {
+	public DoubleLinkedListNode(T value) {
 		this.value=value;
 	}
 
-	public Node(int key, T value) {
+	public DoubleLinkedListNode(int key, T value) {
 		this.key=key;
 		this.value=value;
 	}
@@ -34,19 +35,19 @@ public class Node<T> implements Serializable {
 		this.value = value;
 	}
 
-	public Node getPre() {
+	public DoubleLinkedListNode getPre() {
 		return pre;
 	}
 
-	public void setPre(Node pre) {
+	public void setPre(DoubleLinkedListNode pre) {
 		this.pre = pre;
 	}
 
-	public Node getNext() {
+	public DoubleLinkedListNode getNext() {
 		return next;
 	}
 
-	public void setNext(Node next) {
+	public void setNext(DoubleLinkedListNode next) {
 		this.next = next;
 	}
 

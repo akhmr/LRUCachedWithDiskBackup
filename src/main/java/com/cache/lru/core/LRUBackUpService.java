@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 import com.cache.lru.core.util.ByteUtil;
 import com.cache.lru.model.CacheDiskBackUpStrategy;
 import com.cache.lru.model.CustomRunnable;
-import com.cache.lru.model.Node;
+import com.cache.lru.model.DoubleLinkedListNode;
 
 public class LRUBackUpService {
 	private CacheDiskBackUpStrategy cacheStrategy;
@@ -28,7 +28,7 @@ public class LRUBackUpService {
 		}
 	}
 
-	public <T> boolean writeToDiskcAsAsyn(Node<T> node) {
+	public <T> boolean writeToDiskcAsAsyn(DoubleLinkedListNode<T> node) {
 		try {
 			CustomRunnable customRunnable = new CustomRunnable(node, fileService);
 			executor.submit(customRunnable);
@@ -41,7 +41,7 @@ public class LRUBackUpService {
 
 	}
 
-	public boolean persistance(Node node) throws IOException {
+	public boolean persistance(DoubleLinkedListNode node) throws IOException {
 		if (cacheStrategy.equals(CacheDiskBackUpStrategy.Sync)) {
 			return writeToDisk(ByteUtil.objToByte(node), String.valueOf(node.getValue()));
 		} else {
