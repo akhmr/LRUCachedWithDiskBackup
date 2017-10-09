@@ -25,8 +25,10 @@ public class TestLrCache {
 		for(int i=0; i< 100; i++){
 			array[i]=getRandomNumber(0,100);
 			cache.put(i, array[i]);
-			System.out.println(cache.get(i));
-			Assert.assertEquals(array[i], cache.get(i));
+			System.out.println(""+cache.get(i));
+			Assert.assertEquals((int)array[i], (int)cache.get(i));
+			//System.out.println(cache.get(i));
+			//Assert.assertEquals(array[i], cache.get(i));
 
 		}
 		

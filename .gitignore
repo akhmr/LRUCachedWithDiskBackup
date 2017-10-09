@@ -10,4 +10,5 @@ opt/
 target/
 target
 test-output/
+target/classes/
 

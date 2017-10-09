@@ -6,7 +6,6 @@ import java.util.concurrent.Executors;
 
 import com.cache.lru.core.util.ByteUtil;
 import com.cache.lru.model.CacheDiskBackUpStrategy;
-import com.cache.lru.model.CustomRunnable;
 import com.cache.lru.model.DoublyNode;
 
 public class LRUBackUpService {
@@ -29,13 +28,13 @@ public class LRUBackUpService {
 	}
 
 	public <T> boolean writeToDiskcAsAsyn(DoublyNode<T> node) {
-		try {
-			CustomRunnable customRunnable = new CustomRunnable(node, fileService);
-			executor.submit(customRunnable);
-		} catch (Exception e) {
-			e.printStackTrace();
-			return false;
-		}
+		executor.submit(() -> {
+			try {
+				fileService.writeBytesToFile(ByteUtil.objToByte(node), String.valueOf(node.getKey()));
+			} catch (Exception ioe) {	
+				ioe.printStackTrace();
+			}
+		});
 
 		return true;
 
