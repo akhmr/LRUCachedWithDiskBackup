@@ -33,7 +33,7 @@ public class LRUCache {
 		return null;
 	}
 
-	public <T> void set(int key, T value) throws IOException {
+	public <T> void put(int key, T value) throws IOException {
 		if (map.containsKey(key)) {
 			Node old = map.get(key);
 			old.setValue(value);
